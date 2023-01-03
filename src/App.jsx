@@ -1,34 +1,18 @@
-import { useEffect, useState } from 'react'
-import { getAreaData } from './api'
-
-import './App.css'
+import "./App.css";
+import { useState } from "react";
+import PostCodeForm from "./api/components/PostCodeForm";
+import AreaCards from "./api/components/AreaCards";
 
 function App() {
-
   const [areas, setAreas] = useState([]);
-
-  const load = async () => {
-    try {
-      const areaData = await getAreaData()
-
-      areas.concat(areaData);
-  
-      setAreas(areas);
-    } catch (error) {
-      window.alert("todo: fix app")
-    }
-  }
-
-  useEffect(() => {
-    load();
-  }, []);
 
   return (
     <div className="App">
       <h1>Postcoders</h1>
-      <h2>{`Areas for BB10: ${areas.length}`}</h2>
+      <PostCodeForm areas={areas} setAreas={setAreas} />
+      <AreaCards areas={areas} />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
